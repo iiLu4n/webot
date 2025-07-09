@@ -3,63 +3,243 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Criação de Bots no WhatsApp - Webot</title>
-  <meta name="description" content="Automatize seu atendimento e venda todos os dias com um chatbot profissional no WhatsApp. Ideal para autônomos, pequenas empresas e e-commerces.">
-  <link rel="stylesheet" href="style.css" />
+  <title>Webot - Bots que Vendem por Você</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(ellipse at top left, #0f172a, #020617);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2em;
+      opacity: 0.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta {
+      margin-top: 20px;
+      display: inline-block;
+      background: #22c55e;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 20px #22c55e88;
+      transition: 0.3s;
+    }
+
+    .cta:hover {
+      background: #16a34a;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 24px;
+      padding: 60px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #1e293b;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 0 12px #0f172a;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card h2 {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      opacity: 0.9;
+    }
+
+    .bot-container {
+      position: fixed;
+      right: 40px;
+      bottom: 100px;
+      cursor: pointer;
+      z-index: 999;
+      text-align: center;
+    }
+
+    .bot-image {
+      width: 100px;
+      height: 100px;
+      background: url('robofofo.png') no-repeat center center/contain;
+      filter: drop-shadow(0 0 20px #00f2ff);
+    }
+
+    .speech-bubble {
+      background: white;
+      color: black;
+      padding: 12px 16px;
+      border-radius: 15px;
+      position: absolute;
+      right: 120px;
+      top: 0;
+      width: 200px;
+      font-weight: 600;
+      font-size: 0.9em;
+    }
+
+    .whatsapp-button {
+      display: none;
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      z-index: 999;
+      animation: pulse 1.2s ease-out forwards;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.5); opacity: 0; }
+      60% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      opacity: 0.5;
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <h1>🤖 Criação de Bots para WhatsApp com Inteligência</h1>
-    <p>Transforme o seu atendimento com um bot que responde, vende e fideliza clientes 24h por dia.</p>
-    <a href="https://wa.me/5511977051856" class="cta" id="botao-whatsapp" target="_blank">💬 Quero um Bot no Meu WhatsApp</a>
+    <h1>Transforme seu WhatsApp em um vendedor 24h</h1>
+    <p>Com a Webot, seu atendimento é automático, rápido e profissional.</p>
+    <a href="https://wa.me/5511977051856" class="cta">💬 Quero meu bot agora</a>
   </header>
 
-  <section class="value">
-    <h2>Automatize seu atendimento, mesmo sem saber nada de tecnologia</h2>
-    <p>Na <strong>Webot</strong>, criamos bots sob medida para o seu negócio. Um chatbot no WhatsApp pode responder perguntas frequentes, enviar orçamentos, coletar dados dos clientes e muito mais — tudo de forma automática e profissional.</p>
-    <p>Ideal para quem vende pelo celular, atende clientes no dia a dia ou quer parar de perder tempo com mensagens repetitivas.</p>
+  <section class="cards">
+    <div class="card">
+      <h2>🤖 Atendimento que vende</h2>
+      <p>Seus clientes são atendidos até enquanto você dorme.</p>
+    </div>
+    <div class="card">
+      <h2>✨ O que ele faz?</h2>
+      <p>Responde, coleta dados, envia orçamentos e vende por você.</p>
+    </div>
+    <div class="card">
+      <h2>🎯 Para quem?</h2>
+      <p>Ideal para autônomos, oficinas, lojas, nutricionistas e muito mais.</p>
+    </div>
+    <div class="card">
+      <h2>🚀 Pronto pra começar?</h2>
+      <p>Clique no robô ou botão verde e veja a mágica acontecer.</p>
+    </div>
   </section>
 
-  <section class="benefits">
-    <h2>🧠 Benefícios da automação com bots</h2>
-    <ul>
-      <li>✅ Atendimentos 100% automáticos, 24h por dia</li>
-      <li>✅ Economia de tempo e aumento nas vendas</li>
-      <li>✅ Respostas rápidas e organizadas para seus clientes</li>
-      <li>✅ Personalização total com nome, CNPJ, frota e muito mais</li>
-    </ul>
-  </section>
+  <div class="bot-container" onclick="respostaWebot()">
+    <div class="speech-bubble" id="speech">Oi! Eu sou a Webot 🤖</div>
+    <div class="bot-image" id="bot"></div>
+  </div>
 
-  <section class="quemusa">
-    <h2>👥 Para quem criamos bots</h2>
-    <p>Autônomos, pequenos negócios, oficinas, lojas de peças, psicólogos, nutricionistas, academias, lojas de roupa, consultores e qualquer profissional que use o WhatsApp como canal de vendas.</p>
-  </section>
+  <button id="zapButton" class="whatsapp-button" onclick="window.open('https://wa.me/5511977051856', '_blank')">
+    💬 Fale no WhatsApp
+  </button>
 
-  <section class="cta-final">
-    <h2>📲 Pronto para automatizar seu WhatsApp?</h2>
-    <p>Fale comigo e veja ao vivo como um bot pode mudar o seu atendimento.</p>
-    <a href="https://wa.me/5511977051856" class="cta" target="_blank">✨ Falar com Especialista</a>
-  </section>
+  <audio id="magic-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_63605e3a69.mp3?filename=magic-bell-13884.mp3" preload="auto"></audio>
 
   <footer>
-    <p>© 2025 Webot - Especialistas em bots de atendimento no WhatsApp</p>
+    © 2025 Webot - Especialistas em bots no WhatsApp
   </footer>
 
-  <!-- Chat demo da Webot -->
-  
-    <script src="https://cdn.botpress.cloud/webchat/v3.0/inject.js" defer></script>
-<script src="https://files.bpcontent.cloud/2025/01/13/01/20250113012231-93NAYCMR.js" defer></script>
-    
   <script>
-    window.addEventListener("load", () => {
-      const interval = setInterval(() => {
-        const chatBtn = document.querySelector('[data-testid="launcher"]');
-        if (chatBtn) {
-          chatBtn.click(); // Abre automaticamente
-          clearInterval(interval);
-        }
-      }, 500);
-    });
+    const frasesWebot = [
+      "Bem-vindo à Webot, a casa dos bots inteligentes!",
+      "Fale comigo e descubra como automatizar seu negócio!",
+      "Já imaginou vender enquanto dorme?"  
+    ];
+
+    const cliqueFrases = [
+      "A Webot automatiza seu atendimento e aumenta suas vendas!",
+      "Clique no botão verde e veja a mágica acontecer!",
+      "Um bot pode transformar o seu negócio."
+    ];
+
+    let index = 0;
+    let vozFemininaSelecionada = null;
+    let zapAtivado = false;
+
+    function falar(texto) {
+      const fala = new SpeechSynthesisUtterance(texto);
+      fala.lang = 'pt-BR';
+      fala.pitch = 2;
+      fala.rate = 1.4;
+      if (vozFemininaSelecionada) fala.voice = vozFemininaSelecionada;
+      window.speechSynthesis.speak(fala);
+    }
+
+    function carregarVozFeminina() {
+      const vozes = window.speechSynthesis.getVoices();
+      vozFemininaSelecionada = vozes.find(v => v.lang.includes('pt') && v.name.toLowerCase().includes('f'));
+    }
+
+    function falarAutomaticamente() {
+      if (index >= frasesWebot.length) return;
+      const frase = frasesWebot[index];
+      document.getElementById("speech").innerText = frase;
+      falar(frase);
+      if (index === 1 && !zapAtivado) mostrarBotaoWhatsapp();
+      index++;
+    }
+
+    function mostrarBotaoWhatsapp() {
+      zapAtivado = true;
+      const bot = document.getElementById("bot");
+      bot.style.animation = "pulse 1s ease-in-out 2";
+      document.getElementById("zapButton").style.display = "block";
+      document.getElementById("magic-sound").play();
+    }
+
+    function respostaWebot() {
+      const resposta = cliqueFrases[Math.floor(Math.random() * cliqueFrases.length)];
+      document.getElementById("speech").innerText = resposta;
+      falar(resposta);
+    }
+
+    window.speechSynthesis.onvoiceschanged = () => {
+      carregarVozFeminina();
+      setTimeout(falarAutomaticamente, 2000);
+      setTimeout(falarAutomaticamente, 14000);
+    };
   </script>
+
 </body>
 </html>
