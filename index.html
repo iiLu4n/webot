@@ -2,244 +2,1261 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Webot - Bots que Vendem por Você</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="theme-color" content="#f7c400" />
+  <meta name="description" content="Baixe shows completos em MP3 – libere o download clicando no link VIP do parceiro." />
+  <title>InstaLows • Downloads com Link VIP</title>
+
   <style>
-    body {
+    /* ===== RESET & VARIÁVEIS ===== */
+    * {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(ellipse at top left, #0f172a, #020617);
-      color: white;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --bg: #0b0b12;
+      --bg2: #12121e;
+      --card: #181826;
+      --card2: #1f1f30;
+      --line: rgba(255, 255, 255, 0.06);
+      --text: #f0f2fa;
+      --muted: #9aa3b9;
+      --gold: #f7c400;
+      --gold2: #ffd84c;
+      --gold-dark: #c99f00;
+      --green: #2ecc71;
+      --red: #ff5a6a;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      --radius: 24px;
+      --max: 1120px;
+    }
+    html,
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-
-    header {
-      text-align: center;
-      padding: 60px 20px 20px;
-    }
-
-    header h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 1.2em;
-      opacity: 0.8;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .cta {
-      margin-top: 20px;
-      display: inline-block;
-      background: #22c55e;
-      color: white;
-      padding: 14px 28px;
-      border-radius: 50px;
-      font-weight: bold;
+    a {
+      color: inherit;
       text-decoration: none;
-      box-shadow: 0 0 20px #22c55e88;
-      transition: 0.3s;
+    }
+    button,
+    input {
+      font: inherit;
+      border: 0;
+      outline: none;
     }
 
-    .cta:hover {
-      background: #16a34a;
+    /* ===== LAYOUT ===== */
+    .app {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 24px;
-      padding: 60px 40px;
-      max-width: 1100px;
+    /* ===== TOPBAR ===== */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(20px);
+      background: linear-gradient(180deg, rgba(11, 11, 18, 0.92), rgba(11, 11, 18, 0.7));
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner {
+      max-width: var(--max);
       margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, var(--gold), var(--gold-dark));
+      box-shadow: 0 8px 24px rgba(247, 196, 0, 0.3);
+      display: grid;
+      place-items: center;
+      color: #121212;
+      font-weight: 900;
+      font-size: 1.2rem;
+      flex: 0 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
+      transform: rotate(25deg);
+      animation: shine 4.5s linear infinite;
+    }
+    @keyframes shine {
+      0% {
+        transform: translateX(-50%) rotate(25deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 1;
+      }
+      30% {
+        transform: translateX(60%) rotate(25deg);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(60%) rotate(25deg);
+        opacity: 0;
+      }
+    }
+    .brand-text h1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      background: linear-gradient(135deg, #fff 60%, var(--gold2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-text p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 16px 8px;
+      width: 100%;
+    }
+    .hero-card {
+      border: 1px solid rgba(247, 196, 0, 0.2);
+      background: radial-gradient(circle at 20% 20%, rgba(247, 196, 0, 0.12), transparent 60%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(247, 196, 0, 0.1), transparent 40%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      padding: 20px;
+    }
+    .hero-title {
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .hero-title span {
+      color: var(--gold);
+    }
+    .hero-sub {
+      margin: 10px 0 0;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.5;
+      max-width: 56ch;
+    }
+    .hero-actions {
+      margin-top: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      line-height: 1.2;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease, opacity 0.2s;
+      width: 100%;
+    }
+    .btn:active {
+      transform: scale(0.97);
+    }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    .btn-primary {
+      background: linear-gradient(145deg, var(--gold), var(--gold-dark));
+      color: #121212;
+      box-shadow: 0 12px 32px rgba(247, 196, 0, 0.25);
+    }
+    .btn-primary:hover:not(:disabled) {
+      box-shadow: 0 16px 40px rgba(247, 196, 0, 0.35);
+      filter: brightness(1.05);
+    }
+    .btn-gold {
+      background: linear-gradient(145deg, #ffd84c, #e6b800);
+      color: #121212;
+      box-shadow: 0 12px 32px rgba(247, 196, 0, 0.3);
+    }
+    .btn-gold:hover:not(:disabled) {
+      box-shadow: 0 16px 40px rgba(247, 196, 0, 0.4);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .btn-success {
+      background: linear-gradient(145deg, #2ecc71, #1ea85a);
+      color: #0a1f12;
+      box-shadow: 0 12px 32px rgba(46, 204, 113, 0.2);
+    }
+    .btn-success:hover:not(:disabled) {
+      box-shadow: 0 16px 40px rgba(46, 204, 113, 0.3);
+    }
+    .btn-danger {
+      background: linear-gradient(145deg, #ff5a6a, #e04454);
+      color: #fff;
+      box-shadow: 0 12px 32px rgba(255, 90, 106, 0.15);
+    }
+
+    .pulse {
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+        box-shadow: 0 16px 40px rgba(247, 196, 0, 0.35);
+      }
+    }
+
+    .stats {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .stat {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+    .stat strong {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--gold);
+    }
+    .stat span {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== CONTROLS ===== */
+    .controls {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 6px 16px 0;
+      display: grid;
+      gap: 12px;
+      width: 100%;
+    }
+    .searchbox {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(247, 196, 0, 0.15);
+      border-radius: 18px;
+      padding: 12px 16px;
+    }
+    .searchbox input {
+      width: 100%;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .searchbox input::placeholder {
+      color: #6a7290;
+    }
+
+    .chips {
+      display: flex;
+      gap: 10px;
+      overflow: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .chips::-webkit-scrollbar {
+      display: none;
+    }
+    .chip {
+      flex: 0 0 auto;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: #bcc3d9;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+    .chip.active {
+      background: linear-gradient(145deg, var(--gold), var(--gold-dark));
+      color: #121212;
+      border-color: transparent;
+      box-shadow: 0 8px 24px rgba(247, 196, 0, 0.2);
+    }
+
+    /* ===== GRID ===== */
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 16px 28px;
+      width: 100%;
+    }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 12px;
+    }
+    .section-head h2 {
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+    }
+    .section-head small {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr;
     }
 
     .card {
-      background: #1e293b;
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 0 12px #0f172a;
-      transition: transform 0.3s;
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, border-color 0.2s;
     }
-
+    .card:active {
+      transform: scale(0.98);
+    }
     .card:hover {
-      transform: translateY(-4px);
+      border-color: rgba(247, 196, 0, 0.2);
     }
 
-    .card h2 {
-      font-size: 1.3em;
-      margin-bottom: 10px;
+    .cover-wrap {
+      position: relative;
+      aspect-ratio: 16/10;
+      background: radial-gradient(circle at center, rgba(247, 196, 0, 0.1), transparent 60%);
+      overflow: hidden;
     }
-
-    .card p {
-      opacity: 0.9;
+    .cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-
-    .bot-container {
-      position: fixed;
-      right: 40px;
-      bottom: 100px;
-      cursor: pointer;
-      z-index: 999;
-      text-align: center;
-    }
-
-    .bot-image {
-      width: 100px;
-      height: 100px;
-      background: url('robofofo.png') no-repeat center center/contain;
-      filter: drop-shadow(0 0 20px #00f2ff);
-    }
-
-    .speech-bubble {
-      background: white;
-      color: black;
-      padding: 12px 16px;
-      border-radius: 15px;
+    .cover-fallback {
       position: absolute;
-      right: 120px;
-      top: 0;
-      width: 200px;
-      font-weight: 600;
-      font-size: 0.9em;
-    }
-
-    .whatsapp-button {
-      display: none;
-      position: fixed;
-      bottom: 40px;
-      right: 40px;
-      background-color: #25D366;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      padding: 15px 25px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      z-index: 999;
-      animation: pulse 1.2s ease-out forwards;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(0.5); opacity: 0; }
-      60% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); }
-    }
-
-    footer {
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, rgba(247, 196, 0, 0.15), rgba(0, 0, 0, 0.4));
+      color: #fff;
+      font-weight: 800;
       text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
-      opacity: 0.5;
+      padding: 16px;
+    }
+    .cover-fallback.hidden {
+      display: none;
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+    .title-row h3 {
+      font-size: 1rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin: 0;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .desc {
+      margin: 10px 0 0;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .actions {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .empty {
+      display: none;
+      margin-top: 20px;
+      padding: 30px 20px;
+      border: 1px dashed rgba(247, 196, 0, 0.2);
+      border-radius: 22px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    /* ===== BOTTOM CTA ===== */
+    .bottom-cta {
+      position: sticky;
+      bottom: 0;
+      z-index: 35;
+      padding: 12px 16px 16px;
+      background: linear-gradient(180deg, transparent, rgba(11, 11, 18, 0.8) 20%, rgba(11, 11, 18, 0.98));
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .bottom-cta-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      gap: 12px;
+    }
+    .bottom-pill {
+      background: rgba(247, 196, 0, 0.08);
+      border: 1px solid rgba(247, 196, 0, 0.15);
+      border-radius: 18px;
+      padding: 10px 14px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .bottom-pill strong {
+      color: #fff;
+    }
+
+    /* ===== OVERLAY / MODAL ===== */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(14px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px;
+    }
+    .overlay.show {
+      display: flex;
+    }
+
+    .modal {
+      width: min(100%, 560px);
+      max-height: 90vh;
+      overflow: auto;
+      background: radial-gradient(circle at top left, rgba(247, 196, 0, 0.08), transparent 40%),
+        linear-gradient(180deg, #1a1a2a, #0f0f1a);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+    }
+    .modal-head {
+      padding: 18px 18px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .modal-title {
+      font-size: 1.1rem;
+      font-weight: 900;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .close {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+    .close:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .modal-body {
+      padding: 0 18px 18px;
+    }
+    .notice {
+      display: flex;
+      gap: 14px;
+      padding: 14px;
+      background: rgba(247, 196, 0, 0.1);
+      border: 1px solid rgba(247, 196, 0, 0.2);
+      border-radius: 20px;
+      margin-top: 4px;
+    }
+    .notice-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, var(--gold), var(--gold-dark));
+      color: #121212;
+      font-weight: 900;
+      font-size: 1.1rem;
+    }
+    .notice p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .notice p strong {
+      color: var(--gold);
+    }
+
+    .modal-file {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 14px;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 12px;
+    }
+    .modal-cover {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      object-fit: cover;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .modal-file h4 {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+    .modal-file .small {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .vip-step {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: center;
+    }
+    .vip-step .lock-icon {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 6px;
+      transition: 0.3s;
+    }
+    .vip-step .lock-icon.unlocked {
+      color: var(--green);
+    }
+    .vip-step .step-title {
+      font-weight: 800;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+    .vip-step .step-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .vip-step .click-count {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .modal-actions {
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+    .modal-actions .btn {
+      min-height: 48px;
+    }
+
+    .mini-text {
+      margin-top: 14px;
+      font-size: 0.75rem;
+      color: #6a7290;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .mini-text a {
+      color: var(--gold);
+      text-decoration: underline;
+    }
+
+    .footer {
+      margin-top: auto;
+      padding: 20px 16px 30px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+    .footer strong {
+      color: #fff;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 640px) {
+      .hero-title {
+        font-size: 1.7rem;
+      }
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-actions {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (min-width: 980px) {
+      .topbar-inner,
+      .hero,
+      .controls,
+      .section,
+      .bottom-cta {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .hero-title {
+        font-size: 2rem;
+        max-width: 14ch;
+      }
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .overlay {
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="app">
 
-  <header>
-    <h1>Transforme seu WhatsApp em um vendedor 24h</h1>
-    <p>Com a Webot, seu atendimento é automático, rápido e profissional.</p>
-    <a href="https://wa.me/5511977051856" class="cta">💬 Quero meu bot agora</a>
-  </header>
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand-mark" aria-hidden="true">$</div>
+        <div class="brand-text">
+          <h1>Insta<span style="color:var(--gold);">Lows</span></h1>
+          <p>Baixe shows • Libere com 1 clique VIP</p>
+        </div>
+      </div>
+    </header>
 
-  <section class="cards">
-    <div class="card">
-      <h2>🤖 Atendimento que vende</h2>
-      <p>Seus clientes são atendidos até enquanto você dorme.</p>
-    </div>
-    <div class="card">
-      <h2>✨ O que ele faz?</h2>
-      <p>Responde, coleta dados, envia orçamentos e vende por você.</p>
-    </div>
-    <div class="card">
-      <h2>🎯 Para quem?</h2>
-      <p>Ideal para autônomos, oficinas, lojas, nutricionistas e muito mais.</p>
-    </div>
-    <div class="card">
-      <h2>🚀 Pronto pra começar?</h2>
-      <p>Clique no robô ou botão verde e veja a mágica acontecer.</p>
-    </div>
-  </section>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-inner">
+          <h2 class="hero-title">🎵 <span>Baixe</span> o show completo<br>em <span>MP3</span> agora!</h2>
+          <p class="hero-sub">
+            <strong>Clique no link VIP</strong> do nosso parceiro e libere o download instantâneo.
+            <br>Oferta exclusiva – você só precisa <strong>clicar</strong>, sem cadastro!
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-gold pulse" id="heroCta">🔓 LIBERAR MEU DOWNLOAD</button>
+            <button class="btn btn-secondary" id="scrollToDownloads">📂 Ver catálogo</button>
+          </div>
+          <div class="stats">
+            <div class="stat"><strong id="statTotal">0</strong><span>shows disponíveis</span></div>
+            <div class="stat"><strong id="vipCounter">0</strong><span>cliques VIP hoje</span></div>
+            <div class="stat"><strong>⚡</strong><span>sem cadastro</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <div class="bot-container" onclick="respostaWebot()">
-    <div class="speech-bubble" id="speech">Oi! Eu sou a Webot 🤖</div>
-    <div class="bot-image" id="bot"></div>
+    <!-- SEARCH & FILTERS -->
+    <section class="controls" id="downloadsAnchor">
+      <label class="searchbox" for="searchInput">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="10.5" cy="10.5" r="7.5" />
+          <path d="M16.5 16.5L21 21" />
+        </svg>
+        <input id="searchInput" type="search" placeholder="Pesquisar show, artista..." autocomplete="off" />
+      </label>
+      <div class="chips" id="chips">
+        <button class="chip active" data-filter="all">Tudo</button>
+        <button class="chip" data-filter="forro">Forró</button>
+        <button class="chip" data-filter="piseiro">Piseiro</button>
+        <button class="chip" data-filter="antigas">Antigas</button>
+        <button class="chip" data-filter="ao-vivo">Ao vivo</button>
+      </div>
+    </section>
+
+    <!-- DOWNLOAD GRID -->
+    <section class="section">
+      <div class="section-head">
+        <h2>🔥 Destaques – clique no VIP e baixe</h2>
+        <small id="resultsLabel">carregando...</small>
+      </div>
+      <div class="grid" id="downloadsGrid"></div>
+      <div class="empty" id="emptyState">Nenhum resultado encontrado. Tente outro filtro.</div>
+    </section>
+
+    <!-- BOTTOM CTA -->
+    <div class="bottom-cta">
+      <div class="bottom-cta-inner">
+        <div class="bottom-pill">
+          ⚡ <strong>Libere agora:</strong> clique no link VIP e o download é liberado na hora.
+        </div>
+        <button class="btn btn-gold" id="bottomCta">🔓 LIBERAR DOWNLOAD AGORA</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <strong>InstaLows</strong> • downloads com parceiro oficial • suporte 24h
+    </footer>
   </div>
 
-  <button id="zapButton" class="whatsapp-button" onclick="window.open('https://wa.me/5511977051856', '_blank')">
-    💬 Fale no WhatsApp
-  </button>
+  <!-- ===== MODAL ===== -->
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <h3 class="modal-title" id="modalTitle">🔓 Libere seu download</h3>
+          <div style="font-size:.8rem;color:var(--muted);margin-top:4px;">Clique no link VIP abaixo e baixe agora</div>
+        </div>
+        <button class="close" id="closeModal" aria-label="Fechar">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="notice">
+          <div class="notice-icon">⚡</div>
+          <div>
+            <p>
+              <strong>ATENÇÃO:</strong> Para baixar o show, você precisa <strong>clicar no link VIP</strong> do nosso parceiro.
+              <br>É rápido, <strong>sem cadastro</strong> e você já libera o download!
+            </p>
+          </div>
+        </div>
 
-  <audio id="magic-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_63605e3a69.mp3?filename=magic-bell-13884.mp3" preload="auto"></audio>
+        <div class="modal-file">
+          <img class="modal-cover" id="modalCover" alt="Capa do show" />
+          <div>
+            <h4 id="modalName">Nome do show</h4>
+            <div class="small" id="modalInfo">Artista • Tamanho • Formato</div>
+          </div>
+        </div>
 
-  <footer>
-    © 2025 Webot - Especialistas em bots no WhatsApp
-  </footer>
+        <!-- PASSO VIP -->
+        <div class="vip-step" id="vipStep">
+          <span class="lock-icon" id="lockIcon">🔒</span>
+          <div class="step-title" id="stepTitle">Clique no link VIP para liberar</div>
+          <div class="step-desc" id="stepDesc">Ao clicar, o download será liberado automaticamente.</div>
+          <div class="click-count" id="clickCount"></div>
+        </div>
+
+        <!-- BOTÕES -->
+        <div class="modal-actions">
+          <a class="btn btn-gold pulse" id="vipLinkBtn" href="#" target="_blank" rel="noopener noreferrer">
+            🔓 CLICAR NO LINK VIP E LIBERAR
+          </a>
+          <button class="btn btn-success" id="downloadBtn" disabled>
+            ⬇️ BAIXAR AGORA (liberar primeiro)
+          </button>
+          <button class="btn btn-secondary" id="closeModal2">Voltar</button>
+        </div>
+
+        <div class="mini-text">
+          Ao clicar no link VIP, você será redirecionado ao site do parceiro.
+          O download será liberado imediatamente após o clique.
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
-    const frasesWebot = [
-      "Bem-vindo à Webot, a casa dos bots inteligentes!",
-      "Fale comigo e descubra como automatizar seu negócio!",
-      "Já imaginou vender enquanto dorme?"  
+    /*
+     * ============================================================
+     * 🎯 COMO ADICIONAR UM NOVO DOWNLOAD
+     * ============================================================
+     * Basta copiar e colar um novo objeto dentro do array "downloads".
+     * Campos:
+     *   title, artist, category ("forro","piseiro","antigas","ao-vivo"),
+     *   size, format, description, cover (URL da imagem),
+     *   driveLink (URL do Google Drive/Mega),
+     *   sponsorLink (URL do link VIP do parceiro)
+     * ============================================================
+     */
+
+    const downloads = [
+      {
+        title: "Aviões Do Forró 2013 para Relembrar",
+        artist: "Xand Avião",
+        category: "forro",
+        size: "48 MB",
+        format: "MP3",
+        description: "Melhores trechos do Show de 2013",
+        cover: "https://i9.ytimg.com/vi/pg8SSWSkb54/maxresdefault.jpg?v=6a617ecb&sqp=CIy-mdMG&rs=AOn4CLBavDr3wxD5bZUucq_qDD8D3h-hnA",
+        driveLink: "https://drive.google.com/SEU_LINK_AQUI",
+        sponsorLink: "https://1whqyu.com/betting?p=bioe&sharebet=Instalows"
+      },
+      {
+        title: "Junior Vianna Ao Vivo",
+        artist: "Junior Vianna",
+        category: "ao-vivo",
+        size: "52 MB",
+        format: "MP3",
+        description: "Ao vivo com plateia – energia pura.",
+        cover: "https://i.imgur.com/SEU_LINK_2.jpg",
+        driveLink: "https://drive.google.com/SEU_LINK_AQUI",
+        sponsorLink: "https://SEU-LINK-DA-BET-AQUI.com"
+      },
+      {
+        title: "Forró das Antigas",
+        artist: "Coletânea",
+        category: "antigas",
+        size: "45 MB",
+        format: "MP3",
+        description: "Os clássicos que não saem da cabeça.",
+        cover: "https://i.imgur.com/SEU_LINK_3.jpg",
+        driveLink: "https://drive.google.com/SEU_LINK_AQUI",
+        sponsorLink: "https://SEU-LINK-DA-BET-AQUI.com"
+      },
+      {
+        title: "Piseiro de Impacto",
+        artist: "Artista Destaque",
+        category: "piseiro",
+        size: "39 MB",
+        format: "MP3",
+        description: "Batida forte, som limpo.",
+        cover: "https://i.imgur.com/SEU_LINK_4.jpg",
+        driveLink: "https://drive.google.com/SEU_LINK_AQUI",
+        sponsorLink: "https://SEU-LINK-DA-BET-AQUI.com"
+      }
     ];
 
-    const cliqueFrases = [
-      "A Webot automatiza seu atendimento e aumenta suas vendas!",
-      "Clique no botão verde e veja a mágica acontecer!",
-      "Um bot pode transformar o seu negócio."
-    ];
+    // ============================================================
+    // DOM REFERENCES
+    // ============================================================
+    const grid = document.getElementById("downloadsGrid");
+    const searchInput = document.getElementById("searchInput");
+    const chips = document.getElementById("chips");
+    const emptyState = document.getElementById("emptyState");
+    const resultsLabel = document.getElementById("resultsLabel");
+    const statTotal = document.getElementById("statTotal");
+    const vipCounter = document.getElementById("vipCounter");
+    const overlay = document.getElementById("overlay");
+    const closeModal = document.getElementById("closeModal");
+    const closeModal2 = document.getElementById("closeModal2");
+    const modalCover = document.getElementById("modalCover");
+    const modalName = document.getElementById("modalName");
+    const modalInfo = document.getElementById("modalInfo");
+    const vipLinkBtn = document.getElementById("vipLinkBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const heroCta = document.getElementById("heroCta");
+    const bottomCta = document.getElementById("bottomCta");
+    const scrollToDownloads = document.getElementById("scrollToDownloads");
 
-    let index = 0;
-    let vozFemininaSelecionada = null;
-    let zapAtivado = false;
+    // Elementos do passo VIP
+    const lockIcon = document.getElementById("lockIcon");
+    const stepTitle = document.getElementById("stepTitle");
+    const stepDesc = document.getElementById("stepDesc");
+    const clickCount = document.getElementById("clickCount");
 
-    function falar(texto) {
-      const fala = new SpeechSynthesisUtterance(texto);
-      fala.lang = 'pt-BR';
-      fala.pitch = 2;
-      fala.rate = 1.4;
-      if (vozFemininaSelecionada) fala.voice = vozFemininaSelecionada;
-      window.speechSynthesis.speak(fala);
+    let activeFilter = "all";
+    let currentItem = null;
+    let isVipClicked = false;
+
+    // ============================================================
+    // VIP CLICK COUNTER (global, armazenado no localStorage)
+    // ============================================================
+    function getVipClicks() {
+      return parseInt(localStorage.getItem("vipClicksTotal") || "0", 10);
     }
 
-    function carregarVozFeminina() {
-      const vozes = window.speechSynthesis.getVoices();
-      vozFemininaSelecionada = vozes.find(v => v.lang.includes('pt') && v.name.toLowerCase().includes('f'));
+    function incrementVipClicks() {
+      const current = getVipClicks();
+      localStorage.setItem("vipClicksTotal", String(current + 1));
+      updateVipCounter();
     }
 
-    function falarAutomaticamente() {
-      if (index >= frasesWebot.length) return;
-      const frase = frasesWebot[index];
-      document.getElementById("speech").innerText = frase;
-      falar(frase);
-      if (index === 1 && !zapAtivado) mostrarBotaoWhatsapp();
-      index++;
+    function updateVipCounter() {
+      vipCounter.textContent = getVipClicks();
     }
 
-    function mostrarBotaoWhatsapp() {
-      zapAtivado = true;
-      const bot = document.getElementById("bot");
-      bot.style.animation = "pulse 1s ease-in-out 2";
-      document.getElementById("zapButton").style.display = "block";
-      document.getElementById("magic-sound").play();
+    // ============================================================
+    // CHECK VIP STATUS FOR A SPECIFIC ITEM (usando sessionStorage)
+    // ============================================================
+    function isVipClickedForItem(title) {
+      return sessionStorage.getItem("vip_" + title) === "true";
     }
 
-    function respostaWebot() {
-      const resposta = cliqueFrases[Math.floor(Math.random() * cliqueFrases.length)];
-      document.getElementById("speech").innerText = resposta;
-      falar(resposta);
+    function markVipClickedForItem(title) {
+      sessionStorage.setItem("vip_" + title, "true");
     }
 
-    window.speechSynthesis.onvoiceschanged = () => {
-      carregarVozFeminina();
-      setTimeout(falarAutomaticamente, 2000);
-      setTimeout(falarAutomaticamente, 14000);
-    };
+    // ============================================================
+    // HELPER: escape HTML
+    // ============================================================
+    function esc(str) {
+      return String(str).replace(/[&<>"]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        if (m === '"') return '&quot;';
+        return m;
+      });
+    }
+
+    // ============================================================
+    // FILTER LOGIC
+    // ============================================================
+    function getFiltered() {
+      const q = searchInput.value.trim().toLowerCase();
+      return downloads.filter(item => {
+        const matchSearch = !q ||
+          item.title.toLowerCase().includes(q) ||
+          item.artist.toLowerCase().includes(q) ||
+          item.description.toLowerCase().includes(q) ||
+          item.size.toLowerCase().includes(q);
+        const matchFilter = activeFilter === "all" || item.category === activeFilter;
+        return matchSearch && matchFilter;
+      });
+    }
+
+    // ============================================================
+    // RENDER GRID
+    // ============================================================
+    function render() {
+      const items = getFiltered();
+      statTotal.textContent = downloads.length;
+      resultsLabel.textContent = `${items.length} resultado(s)`;
+
+      if (!items.length) {
+        grid.innerHTML = "";
+        emptyState.style.display = "block";
+        return;
+      }
+      emptyState.style.display = "none";
+
+      let html = "";
+      items.forEach((item, idx) => {
+        const safe = {
+          title: esc(item.title),
+          artist: esc(item.artist),
+          desc: esc(item.description),
+          size: esc(item.size),
+          format: esc(item.format),
+          category: esc(item.category),
+          cover: esc(item.cover || "")
+        };
+        const vipUnlocked = isVipClickedForItem(item.title);
+        const btnLabel = vipUnlocked ? "✅ Baixar agora" : "🔓 Liberar com VIP";
+        html += `
+            <article class="card">
+              <div class="cover-wrap">
+                <span class="badge">${safe.category}</span>
+                <img class="cover" src="${safe.cover}" alt="Capa de ${safe.title}" loading="lazy"
+                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />
+                <div class="cover-fallback hidden">${safe.title}<br><span style="font-weight:400;font-size:.8rem;">${safe.artist}</span></div>
+              </div>
+              <div class="card-body">
+                <div class="title-row"><h3>${safe.title}</h3></div>
+                <div class="meta">
+                  <span class="pill">🎤 ${safe.artist}</span>
+                  <span class="pill">📦 ${safe.size}</span>
+                  <span class="pill">🎵 ${safe.format}</span>
+                </div>
+                <p class="desc">${safe.desc}</p>
+                <div class="actions">
+                  <button class="btn btn-gold" data-index="${idx}">${btnLabel}</button>
+                </div>
+              </div>
+            </article>
+          `;
+      });
+      grid.innerHTML = html;
+    }
+
+    // ============================================================
+    // MODAL CONTROLS
+    // ============================================================
+    function openModal(item) {
+      currentItem = item;
+      const title = item.title;
+      const unlocked = isVipClickedForItem(title);
+
+      // Preenche informações
+      modalCover.src = item.cover;
+      modalCover.alt = `Capa de ${item.title}`;
+      modalName.textContent = item.title;
+      modalInfo.textContent = `${item.artist} • ${item.size} • ${item.format}`;
+
+      // Atualiza link VIP
+      vipLinkBtn.href = item.sponsorLink || "#";
+
+      // Atualiza estado do VIP
+      updateVipUI(unlocked);
+
+      // Configura botão de download
+      if (unlocked) {
+        downloadBtn.disabled = false;
+        downloadBtn.textContent = "⬇️ BAIXAR AGORA";
+        downloadBtn.onclick = function() {
+          if (item.driveLink) window.open(item.driveLink, "_blank");
+        };
+      } else {
+        downloadBtn.disabled = true;
+        downloadBtn.textContent = "🔒 Libere o VIP primeiro";
+        downloadBtn.onclick = null;
+      }
+
+      // Mostra modal
+      overlay.classList.add("show");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+
+      // Atualiza contador de cliques
+      updateVipCounter();
+      updateClickCountDisplay();
+    }
+
+    function updateVipUI(unlocked) {
+      if (unlocked) {
+        lockIcon.textContent = "🔓";
+        lockIcon.classList.add("unlocked");
+        stepTitle.textContent = "✅ VIP liberado! Agora baixe o show.";
+        stepDesc.textContent = "Você já pode clicar no botão de download abaixo.";
+        // Esconde o botão VIP? Melhor mantê-lo, mas mudar o texto
+        vipLinkBtn.textContent = "✅ VIP já liberado (clique novamente se quiser)";
+        vipLinkBtn.classList.remove("pulse");
+        vipLinkBtn.style.opacity = "0.7";
+        // Habilita o download (já feito no openModal)
+      } else {
+        lockIcon.textContent = "🔒";
+        lockIcon.classList.remove("unlocked");
+        stepTitle.textContent = "Clique no link VIP para liberar";
+        stepDesc.textContent = "Ao clicar, o download será liberado automaticamente.";
+        vipLinkBtn.textContent = "🔓 CLICAR NO LINK VIP E LIBERAR";
+        vipLinkBtn.classList.add("pulse");
+        vipLinkBtn.style.opacity = "1";
+      }
+      updateClickCountDisplay();
+    }
+
+    function updateClickCountDisplay() {
+      const total = getVipClicks();
+      clickCount.textContent = `🔹 Já foram ${total} cliques VIP hoje`;
+    }
+
+    function closeModalFn() {
+      overlay.classList.remove("show");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      currentItem = null;
+    }
+
+    // ============================================================
+    // VIP CLICK HANDLER
+    // ============================================================
+    function handleVipClick(e) {
+      if (!currentItem) return;
+      const title = currentItem.title;
+
+      // Abre o link do patrocinador (já no href do botão)
+      // O link será aberto em nova aba devido ao target="_blank"
+
+      // Marca como VIP clicado
+      markVipClickedForItem(title);
+      incrementVipClicks();
+
+      // Atualiza a UI do modal
+      updateVipUI(true);
+
+      // Habilita o download
+      downloadBtn.disabled = false;
+      downloadBtn.textContent = "⬇️ BAIXAR AGORA";
+      downloadBtn.onclick = function() {
+        if (currentItem.driveLink) window.open(currentItem.driveLink, "_blank");
+      };
+
+      // Atualiza o botão do card (se estiver visível) – mas só atualiza quando reabrir
+      // Para atualizar a lista em tempo real, poderíamos rerenderizar, mas é opcional.
+      // Vamos apenas atualizar o texto do botão no card? Para simplificar, deixamos como está,
+      // pois ao fechar e reabrir o modal já estará liberado.
+      // Mas podemos também atualizar o grid em background – faremos um re-render completo
+      // para manter consistência.
+      render();
+
+      // Pequeno feedback visual
+      const originalText = vipLinkBtn.textContent;
+      vipLinkBtn.textContent = "✅ VIP LIBERADO!";
+      setTimeout(() => {
+        vipLinkBtn.textContent = "✅ VIP já liberado (clique novamente se quiser)";
+      }, 800);
+
+      // Atualiza contador
+      updateVipCounter();
+    }
+
+    // ============================================================
+    // EVENT LISTENERS
+    // ============================================================
+    // Search
+    searchInput.addEventListener("input", render);
+
+    // Chips
+    chips.addEventListener("click", (e) => {
+      const btn = e.target.closest(".chip");
+      if (!btn) return;
+      document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+      btn.classList.add("active");
+      activeFilter = btn.dataset.filter;
+      render();
+    });
+
+    // Grid click (delegation)
+    grid.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-index]");
+      if (!btn) return;
+      const idx = parseInt(btn.dataset.index, 10);
+      const item = downloads[idx];
+      if (item) openModal(item);
+    });
+
+    // VIP link click
+    vipLinkBtn.addEventListener("click", handleVipClick);
+
+    // Close modal
+    closeModal.addEventListener("click", closeModalFn);
+    closeModal2.addEventListener("click", closeModalFn);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeModalFn();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay.classList.contains("show")) closeModalFn();
+    });
+
+    // Hero CTA – abre o primeiro item
+    heroCta.addEventListener("click", () => {
+      if (downloads.length) openModal(downloads[0]);
+    });
+    bottomCta.addEventListener("click", () => {
+      if (downloads.length) openModal(downloads[0]);
+    });
+
+    // Scroll to downloads
+    scrollToDownloads.addEventListener("click", () => {
+      document.getElementById("downloadsAnchor").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    // ============================================================
+    // AUTO-OPEN MODAL VIA URL PARAM ?download=title
+    // ============================================================
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const title = params.get("download");
+      if (title) {
+        const decoded = decodeURIComponent(title);
+        const item = downloads.find(d => d.title === decoded);
+        if (item) {
+          setTimeout(() => openModal(item), 600);
+        }
+      }
+    })();
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    updateVipCounter();
+    render();
   </script>
-
 </body>
 </html>
